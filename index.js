@@ -200,91 +200,17 @@ app.get('/style/jsnya', isAuthenticated, (req, res) => {
 });
 
 
-app.use(session({
-  secret: 'your-secret-key',
-  resave: false,
-  saveUninitialized: false,
-  cookie: { secure: false } 
-}));
-
-const akunFilePath = path.join(__dirname, 'akun.json');
-
-const isAuthenticated = (req, res, next) => {
-  console.log("Memeriksa autentikasi, loggedIn: ", req.session.loggedIn); 
-  if (!req.session.loggedIn) {
-      return res.redirect('/login');
-  }
-  next(); 
-};
-
 app.get('/', (req, res) => {
   console.log("Halaman utama diakses");
   res.sendFile(path.join(__dirname, 'public', 'index.html')); 
 });
 
-app.get('/login', (req, res) => {
-  if (req.session.loggedIn) {
-      return res.redirect('/myadmin'); 
-  }
-  res.sendFile(path.join(__dirname, 'public', 'login.html')); 
-});
 
-app.post('/login', (req, res) => {
-  console.log("Login request received");
-  const { username, password } = req.body;
-  fs.readFile(akunFilePath, 'utf-8', (err, data) => {
-      if (err) {
-          console.error("Error reading akun.json", err);
-          return res.status(500).json({ error: 'Terjadi kesalahan saat memuat data akun.' });
-      }
-      try {
-          const akunList = JSON.parse(data);
-          const akun = akunList.find(acc => acc.username === username && acc.password === password);
-          if (akun) {
-              console.log("Akun ditemukan. Login berhasil!");
-              req.session.loggedIn = true; 
-              return res.redirect('/myadmin'); 
-          } else {
-              console.log("Username atau password salah");
-              return res.redirect('/login?error=Username%20atau%20password%20salah!');
-          }
-      } catch (parseError) {
-          console.error("Error parsing JSON", parseError);
-          return res.status(500).json({ error: 'Terjadi kesalahan dalam parsing data akun.' });
-      }
-  });
-});
-
-
-app.get('/myadmin', isAuthenticated, (req, res) => {
-  console.log("Masuk ke /myadmin");
-  res.sendFile(path.join(__dirname, 'public', 'dashboard.html')); 
-});
-
-
-app.get('/api/user', isAuthenticated, (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'user.html'));
-});
-
-app.get('/chat/openai', isAuthenticated, (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'openai.html'));
-});
-
-app.get('/api/server', isAuthenticated, (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'server.html'));
-});
-
-app.get('/rerezz', isAuthenticated, (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'style.css'));
-});
 
 app.get('/rerez', isAuthenticated, (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'script.js'));
 });
 
-app.get('/domain', (req, res) => {
-  res.redirect(`${domain}`); 
-});
 
 app.post("/chat", async (req, res) => {
   const { message } = req.body;
