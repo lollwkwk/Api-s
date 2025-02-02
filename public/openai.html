@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat GPT - HTML Code Display</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #111;
+            color: white;
+        }
+        .chat-container {
+            width: 100%;
+
+            height: 100%;
+            background: #222;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .header {
+            background: #007bff;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .message {
+            max-width: 75%;
+            padding: 12px;
+            border-radius: 10px;
+            word-wrap: break-word;
+            font-size: 16px;
+            display: inline-block;
+            opacity: 0;
+            animation: fadeIn 0.3s ease-in-out forwards;
+            white-space: pre-wrap; /* Preserve whitespace formatting */
+            font-family: monospace; /* Use monospace for code display */
+            background: #333;
+        }
+        .user {
+            background: #007bff;
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 0;
+        }
+        .bot {
+            background: #444;
+            color: white;
+            align-self: flex-start;
+            border-bottom-left-radius: 0;
+        }
+        .input-container {
+            display: flex;
+            padding: 10px;
+            background: #222;
+            border-top: 1px solid #444;
+        }
+        input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #555;
+            border-radius: 20px;
+            outline: none;
+            background: #333;
+            color: white;
+        }
+        button {
+            padding: 10px 15px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            margin-left: 5px;
+            font-size: 18px;
+        }
+        button:disabled {
+            background: #555;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="chat-container">
+        <div class="header">Chat GPT - HTML Code Display</div>
+        <div class="messages" id="messages"></div>
+        <div class="input-container">
+            <input type="text" id="messageInput" placeholder="Tulis pesan..." />
+            <button onclick="sendMessage()" id="sendBtn"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <script>
+const _0x1b1c22=_0x4441;(function(_0x105b41,_0xeede40){const _0x1f4d79=_0x4441,_0x958a6c=_0x105b41();while(!![]){try{const _0x122ef8=-parseInt(_0x1f4d79(0xc1))/0x1*(-parseInt(_0x1f4d79(0xc2))/0x2)+-parseInt(_0x1f4d79(0xcd))/0x3+parseInt(_0x1f4d79(0xde))/0x4+parseInt(_0x1f4d79(0xbd))/0x5*(-parseInt(_0x1f4d79(0xe0))/0x6)+parseInt(_0x1f4d79(0xe2))/0x7*(parseInt(_0x1f4d79(0xc7))/0x8)+parseInt(_0x1f4d79(0xbb))/0x9*(parseInt(_0x1f4d79(0xd6))/0xa)+-parseInt(_0x1f4d79(0xd4))/0xb*(parseInt(_0x1f4d79(0xc9))/0xc);if(_0x122ef8===_0xeede40)break;else _0x958a6c['push'](_0x958a6c['shift']());}catch(_0xad0e87){_0x958a6c['push'](_0x958a6c['shift']());}}}(_0x50fa,0x93698));function _0x4441(_0x194efd,_0x302077){const _0x50fa73=_0x50fa();return _0x4441=function(_0x4441e8,_0x23677f){_0x4441e8=_0x4441e8-0xbb;let _0xe228a=_0x50fa73[_0x4441e8];return _0xe228a;},_0x4441(_0x194efd,_0x302077);}async function sendMessage(){const _0x157d35=_0x4441,_0x4f14d3=document[_0x157d35(0xce)](_0x157d35(0xcc)),_0x55982b=document['getElementById'](_0x157d35(0xc6)),_0x571ca7=document[_0x157d35(0xce)](_0x157d35(0xc3));if(!_0x4f14d3[_0x157d35(0xbe)][_0x157d35(0xbf)]())return;const _0x45a0c8=document[_0x157d35(0xdc)](_0x157d35(0xd7));_0x45a0c8[_0x157d35(0xbc)][_0x157d35(0xc5)](_0x157d35(0xcb),'user'),_0x45a0c8[_0x157d35(0xd5)]=_0x4f14d3[_0x157d35(0xbe)],_0x55982b[_0x157d35(0xd0)](_0x45a0c8),_0x55982b['scrollTop']=_0x55982b['scrollHeight'],_0x571ca7['disabled']=!![];const _0x25c312=document[_0x157d35(0xdc)](_0x157d35(0xd7));_0x25c312['classList'][_0x157d35(0xc5)](_0x157d35(0xcb),_0x157d35(0xd9),'typing'),_0x25c312['textContent']=_0x157d35(0xc4),_0x55982b[_0x157d35(0xd0)](_0x25c312),_0x55982b[_0x157d35(0xd3)]=_0x55982b[_0x157d35(0xd8)];try{const _0x17fcd9=await fetch(_0x157d35(0xdd)+encodeURIComponent(_0x4f14d3['value'])),_0x568e47=await _0x17fcd9['json']();_0x55982b[_0x157d35(0xc8)](_0x25c312);let _0x459c90=_0x568e47[_0x157d35(0xcf)]?.['response']||_0x157d35(0xca);const _0x20e796=escapeHtml(_0x459c90),_0x11b1d4=document['createElement'](_0x157d35(0xd7));_0x11b1d4[_0x157d35(0xbc)][_0x157d35(0xc5)](_0x157d35(0xcb),_0x157d35(0xd9)),_0x11b1d4[_0x157d35(0xd5)]=_0x20e796,_0x55982b[_0x157d35(0xd0)](_0x11b1d4),_0x55982b['scrollTop']=_0x55982b[_0x157d35(0xd8)];}catch(_0x4f6063){console['error'](_0x157d35(0xdb),_0x4f6063),_0x55982b[_0x157d35(0xc8)](_0x25c312);const _0x50e9fc=document[_0x157d35(0xdc)](_0x157d35(0xd7));_0x50e9fc[_0x157d35(0xbc)][_0x157d35(0xc5)](_0x157d35(0xcb),'bot'),_0x50e9fc['innerHTML']=_0x157d35(0xdf),_0x55982b[_0x157d35(0xd0)](_0x50e9fc);}_0x4f14d3[_0x157d35(0xbe)]='',_0x571ca7[_0x157d35(0xd2)]=![];}function escapeHtml(_0x175214){const _0x92c087=_0x4441,_0x5b446c=document[_0x92c087(0xdc)](_0x92c087(0xd7));return _0x175214&&(_0x5b446c[_0x92c087(0xda)]=_0x175214,_0x5b446c[_0x92c087(0xd5)]=_0x175214),_0x5b446c['innerHTML'];}document[_0x1b1c22(0xce)]('messageInput')[_0x1b1c22(0xd1)]('keypress',function(_0x2e4ec0){const _0x422d5a=_0x1b1c22;if(_0x2e4ec0[_0x422d5a(0xe1)]===_0x422d5a(0xc0))sendMessage();});function _0x50fa(){const _0x5a227d=['getElementById','data','appendChild','addEventListener','disabled','scrollTop','33640255gCsHDA','textContent','5968370FfJBeS','div','scrollHeight','bot','innerText','Error\x20Fetching\x20API:','createElement','https://www.api.im-rerezz.xyz/api/openai?message=','4666224ATnbWj','⚠️\x20Error:\x20Gagal\x20menghubungi\x20server!','6GmTzwp','key','7uhWRGs','18dDRoJt','classList','1647955GqKJER','value','trim','Enter','7LHuhEO','261190gXpDJB','sendBtn','Sedang\x20mengetik...','add','messages','7281704XEoNhf','removeChild','12UMUrUH','⚠️\x20API\x20tidak\x20mengembalikan\x20teks!','message','messageInput','579036RsMKwi'];_0x50fa=function(){return _0x5a227d;};return _0x50fa();}
+    </script>
+
+</body>
+</html>
