@@ -1,0 +1,25 @@
+{
+    "name": "visitor-count-api",
+    "version": "1.0.0",
+    "description": "API untuk menampilkan jumlah pengunjung website",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js"
+    },
+    "author": "Your Name",
+    "license": "ISC",
+    "dependencies": {
+        "@octokit/rest": "^21.1.0",
+        "axios": "^1.7.9",
+        "body-parser": "^1.20.3",
+        "cheerio": "^1.0.0",
+        "child_process": "^1.0.2",
+        "cors": "^2.8.5",
+        "express": "^4.17.1",
+        "express-session": "^1.18.1",
+        "node-telegram-bot-api": "^0.66.0",
+        "os": "^0.1.2",
+        "path": "^0.12.7",
+        "systeminformation": "^5.25.11"
+    }
+}
