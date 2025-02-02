@@ -285,14 +285,17 @@ body,h1,h3,p{margin:0}.navbar,.sidebar{background-color:#2a2a3c;padding:20px}.si
           document.getElementById('req-today').textContent = `Error: ${error.message}`;
       });
 
-    fetch('/api/visitor')
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById('visitor-count').textContent = ` ${data}`;
-    })
-      .catch(error => {
-        document.getElementById('visitor-count').textContent = `Error: ${error.message}`;
-    });
+    async function fetchVisitorCount() {
+      try {
+        const response = await fetch('/api/visitor');
+        const data = await response.text();
+        document.getElementById('visitor-count').innerText = `${data}`;
+      } catch (error) {
+        console.error('Error fetching visitor count:', error);
+        document.getElementById('visitor-count').innerText = 'Failed to load visitor count';
+      }
+    }
+fetchVisitorCount();
 
     fetch('/api/platform') 
       .then(response => response.json())  
