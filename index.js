@@ -192,9 +192,8 @@ app.get('/api/tiktokdl', async (req, res) => {
 });
 
 
-app.get('/tes', (req, res) => {
-  console.log("Halaman utama diakses");
-  res.sendFile(path.join(__dirname, 'public', 'tes.html')); 
+app.get('/chat/openai', isAuthenticated, (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'openai.html'));
 });
 
 
