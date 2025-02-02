@@ -195,6 +195,9 @@ app.get('/api/tiktokdl', async (req, res) => {
 app.get('/chat/openai', isAuthenticated, (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'openai.html'));
 });
+app.get('/style/jsnya', isAuthenticated, (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'style', 'script.js'));
+});
 
 
 app.use(session({
