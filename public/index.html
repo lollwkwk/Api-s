@@ -137,23 +137,31 @@ body,h1,h3,p{margin:0}.navbar,.sidebar{background-color:#2a2a3c;padding:20px}.si
         <i class="fas fa-sync card-icon"></i>
         <div class="card-text">
           <h3>Requests Today</h3>
-          <p id="req-today">Loading...</p>
+          <p id="request-count">Loading...</p>
         </div>
       </div>
 
       <div class="card">
-        <i class="fas fa-history card-icon"></i>
+        <i class="fas fa-clock card-icon"></i>
         <div class="card-text">
-          <h3>Run Time</h3>
-          <p id="uptime">Loading...</p>
+          <h3>O'Clock</h3>
+          <p id="time">Loading...</p>
+        </div>
+      </div>
+      
+      <div class="card">
+        <i class="fas fa-calendar-alt card-icon"></i>
+        <div class="card-text">
+          <h3>Day's</h3>
+          <p id="date-info">Loading...</p>
         </div>
       </div>
 
       <div class="card">
         <i class="fas fa-cogs card-icon"></i>
         <div class="card-text">
-          <h3>Platform</h3>
-          <p id="platform-info">Loading...</p>
+          <h3>Device Info</h3>
+          <p id="device-info">Loading...</p>
         </div>
       </div>
 
@@ -162,14 +170,6 @@ body,h1,h3,p{margin:0}.navbar,.sidebar{background-color:#2a2a3c;padding:20px}.si
         <div class="card-text">
           <h3>RAM Info</h3>
           <p id="ram-info">Loading...</p>
-        </div>
-      </div>
-
-      <div class="card">
-        <i class="fas fa-hdd card-icon"></i>
-        <div class="card-text">
-          <h3>ROM Info</h3>
-          <p id="rom-info">Loading...</p>
         </div>
       </div>
 
@@ -267,65 +267,99 @@ body,h1,h3,p{margin:0}.navbar,.sidebar{background-color:#2a2a3c;padding:20px}.si
       window.open(url, '_blank');
     }
 
-    fetch('/api/get-usage-count')
-      .then(response => response.json())
-      .then(data => {
-        document.getElementById('usage-count').textContent = `${data.usageCount}`;
-    })
-      .catch(error => {
-        document.getElementById('usage-count').textContent = `Error: ${error.message}`;
-    });
+    async function getUsageCount() {
+            try {
+                let response = await fetch('https://databse-apis.glitch.me/api/usage-count');
+                let data = await response.json();
+                document.getElementById('usage-count').textContent = data.usageCount;
+            } catch (error) {
+                document.getElementById('usage-count').textContent = "Gagal memuat data";
+                console.error("Error fetching usage count:", error);
+            }
+        }
+        getUsageCount();
 
-    fetch('/api/reqtoday')
-      .then(response => response.json())
-      .then(data => {
-          document.getElementById('req-today').textContent = `${data.reqtoday}`;
-      })
-      .catch(error => {
-          document.getElementById('req-today').textContent = `Error: ${error.message}`;
-      });
+    async function getRequestCount() {
+            try {
+                let response = await fetch('https://databse-apis.glitch.me/api/requesttoday/today');
+                let data = await response.json();
+                document.getElementById('request-count').textContent = data.requestCount;
+            } catch (error) {
+                document.getElementById('request-count').textContent = "Gagal memuat data";
+                console.error("Error fetching request count:", error);
+            }
+        }
+        getRequestCount();
 
-    async function fetchVisitorCount() {
-      try {
-        const response = await fetch('/api/visitor');
-        const data = await response.text();
-        document.getElementById('visitor-count').innerText = `${data}`;
-      } catch (error) {
-        console.error('Error fetching visitor count:', error);
-        document.getElementById('visitor-count').innerText = 'Failed to load visitor count';
-      }
-    }
-fetchVisitorCount();
+    async function getVisitorCount() {
+            try {
+                let response = await fetch('https://databse-apis.glitch.me/increment-visitor');
+                let data = await response.json();
+                document.getElementById('visitor-count').textContent = data.count;
+            } catch (error) {
+                document.getElementById('visitor-count').textContent = "Gagal memuat data";
+                console.error("Error fetching visitor count:", error);
+            }
+        }
+        getVisitorCount();
 
-    fetch('/api/platform') 
-      .then(response => response.json())  
-      .then(data => {
-        document.getElementById('platform-info').textContent = `${data.platform}`;
-    })
-      .catch(error => {
-        console.error('Error:', error);
-        document.getElementById('platform-info').textContent = 'Error loading data';
-    });
+    function updateClock() {
+            let now = new Date();
+            let hours = now.getHours().toString().padStart(2, '0');
+            let minutes = now.getMinutes().toString().padStart(2, '0');
+            let seconds = now.getSeconds().toString().padStart(2, '0');
+            document.getElementById('time').textContent = `${hours}:${minutes}:${seconds}`;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+  
+    function getDeviceName() {
+            let userAgent = navigator.userAgent;
+            let deviceName = "Perangkat Tidak Diketahui";
 
-    fetch('/api/ram') 
-      .then(response => response.json())
-      .then(data => {
-        document.getElementById('ram-info').textContent = `${data.used} / ${data.total}`;
-    })
-      .catch(error => {
-        console.error('Error:', error);
-        document.getElementById('ram-info').textContent = 'Error loading data';
-    });
+            if (/windows phone/i.test(userAgent)) {
+                deviceName = "Windows Phone";
+            } else if (/android/i.test(userAgent)) {
+                deviceName = "Android";
+            } else if (/iPad|Macintosh/i.test(userAgent) && 'ontouchend' in document) {
+                deviceName = "iPad";
+            } else if (/iPhone/i.test(userAgent)) {
+                deviceName = "iPhone";
+            } else if (/Macintosh/i.test(userAgent)) {
+                deviceName = "Mac";
+            } else if (/Windows/i.test(userAgent)) {
+                deviceName = "Windows PC";
+            } else if (/Linux/i.test(userAgent)) {
+                deviceName = "Linux";
+            }
 
-    fetch('/api/rom') 
-      .then(response => response.json()) 
-      .then(data => {
-        document.getElementById('rom-info').textContent = `${data.used} / ${data.total}`;
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        document.getElementById('rom-info').textContent = 'Error loading data';
-    });
+            document.getElementById('device-info').textContent = deviceName;
+        }
+        getDeviceName();
+
+    function getRAMInfo() {
+            if (navigator.deviceMemory) {
+                let totalRAM = navigator.deviceMemory; // Dapatkan jumlah RAM dalam GB
+                document.getElementById('ram-info').textContent = ` ${totalRAM} GB`;
+            } else {
+                document.getElementById('ram-info').textContent = "RAM tidak dapat dideteksi";
+            }
+        }
+        getRAMInfo();
+
+    function getDateInfo() {
+            const days = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+            const months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+            
+            const today = new Date();
+            const day = days[today.getDay()]; // Mendapatkan hari (Minggu, Senin, dst.)
+            const date = today.getDate(); // Mendapatkan tanggal (1, 2, 3, dst.)
+            const month = months[today.getMonth()]; // Mendapatkan bulan (Januari, Februari, dst.)
+            const year = today.getFullYear(); // Mendapatkan tahun (2025, dst.)
+
+            document.getElementById('date-info').textContent = `${day}, ${date} ${month} ${year}`;
+        }
+        getDateInfo();
 
     fetch('https://httpbin.org/ip')
       .then(response => response.json()) 
@@ -391,4 +425,4 @@ fetchVisitorCount();
     
 </script>
 </body>
-</html>
+                                           </html>
