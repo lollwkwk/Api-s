@@ -512,65 +512,13 @@ app.get('/api/reqtoday', async (req, res) => {
 app.get('/api/visitor', async (req, res) => {
   try {
     const response = await axios.get('https://databse-apis.glitch.me/increment-visitor');
-    const visitorCount = response.data.count || 0; 
+    const visitorCount = response.data.count;
     res.status(200).send(visitorCount.toString());
   } catch (error) {
-    console.error('Error fetching visitor data:', error);
     res.status(500).send('Failed to fetch visitor data');
   }
 });
 
-app.get('/api/platform', (req, res) => {
-  try {
-    const platform = os.platform(); 
-    res.json({ platform });
-  } catch (error) {
-    console.error('Error detecting platform:', error);
-    res.status(500).json({ error: 'Failed to detect platform' });
-  }
-});
-
-app.get('/api/ram', (req, res) => {
-  try {
-    const totalMem = os.totalmem(); 
-    const freeMem = os.freemem(); 
-    const usedMem = totalMem - freeMem;
-    const totalMemGB = (totalMem / (1024 * 1024 * 1024)).toFixed(2);
-    const usedMemGB = (usedMem / (1024 * 1024 * 1024)).toFixed(2);  
-    const freeMemGB = (freeMem / (1024 * 1024 * 1024)).toFixed(2);  
-    res.json({
-      used: `${usedMemGB} GB`, 
-      free: `${freeMemGB} GB`, 
-      total: `${totalMemGB} GB`
-    });
-  } catch (error) {
-    console.error('Error detecting RAM usage:', error);
-    res.status(500).json({ error: 'Failed to detect RAM usage' });
-  }
-});
-
-app.get('/api/rom', async (req, res) => {
-  try {
-    const diskData = await si.fsSize(); 
-    if (diskData && diskData.length > 0) {
-      const totalDisk = diskData[0].size;  
-      const usedDisk = diskData[0].used;  
-      const totalDiskGB = (totalDisk / (1024 * 1024 * 1024)).toFixed(2);
-      const usedDiskGB = (usedDisk / (1024 * 1024 * 1024)).toFixed(2);
-      const freeDiskGB = ((totalDisk - usedDisk) / (1024 * 1024 * 1024)).toFixed(2); 
-      res.json({
-        used: `${usedDiskGB} GB`, 
-        free: `${freeDiskGB} GB`, 
-        total: `${totalDiskGB} GB`
-      });
-    } else {
-      res.status(500).json({ error: 'No disk data available' });
-    }
-  } catch (error) {
-    console.error('Error detecting ROM usage:', error);
-    res.status(500).json({ error: 'Failed to detect ROM usage' });
-  }
-});
 
 let startTime = Date.now(); 
 const getUptime = () => {
