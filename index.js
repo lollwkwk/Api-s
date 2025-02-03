@@ -191,11 +191,13 @@ app.get('/api/tiktokdl', async (req, res) => {
   }
 });
 
-
-app.get('/chat/openai', isAuthenticated, (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'openai.html'));
+app.get('/chat/openai', (req, res) => {
+  console.log("Halaman utama diakses");
+  res.sendFile(path.join(__dirname, 'public', 'openai.html')); 
 });
-app.get('/style/jsnya', isAuthenticated, (req, res) => {
+
+
+app.get('/style/jsnya', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'style', 'script.js'));
 });
 
@@ -205,11 +207,6 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html')); 
 });
 
-
-
-app.get('/rerez', isAuthenticated, (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'script.js'));
-});
 
 
 app.post("/chat", async (req, res) => {
