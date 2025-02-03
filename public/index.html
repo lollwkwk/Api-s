@@ -590,7 +590,7 @@
       window.open(url, '_blank');
     }
 
-    async function fetchData() {
+async function fetchUsageData() {
     try {
         let response = await fetch('/api/get-usage-count');
         let data = await response.json();
@@ -599,17 +599,26 @@
         response = await fetch('/api/reqtoday');
         data = await response.json();
         document.getElementById('reqToday').innerText = data.reqtoday;
+    } catch (error) {
+        console.error(error);
+    }
+}
 
-        response = await fetch('/api/visitor');
-        data = await response.text(); 
+// Fungsi untuk memperbarui visitor count
+async function fetchVisitorData() {
+    try {
+        let response = await fetch('/api/visitor');
+        let data = await response.text();
         document.getElementById('visitorCount').innerText = data;
     } catch (error) {
         console.error(error);
     }
 }
-setInterval(fetchData, 5000);
-fetchData();
+setInterval(fetchUsageData, 5000);
 
+fetchVisitorData();
+
+fetchUsageData();
 
     function updateClock() {
             let now = new Date();
