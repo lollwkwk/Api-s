@@ -6,8 +6,331 @@
   <title>My APIs Decode I'M Rerezz</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
-body,h1,h3,p{margin:0}.navbar,.sidebar{background-color:#2a2a3c;padding:20px}.sidebar ul,ul{list-style:none}body{font-family:Arial,sans-serif;background-color:#1e1e2d;color:#fff;transition:background-color .3s,color .3s;overflow-x:hidden}.navbar{display:flex;justify-content:space-between;align-items:center}.navbar h1{font-size:20px}.menu-icons{display:flex;align-items:center;gap:20px}.menu-item .menu-link,.sidebar ul li a{display:flex;align-items:center}.menu-icons i{font-size:30px;cursor:pointer}.sidebar{position:fixed;top:0;left:-300px;width:250px;height:100%;transition:left .9s;z-index:10}.sidebar.active{left:0}.sidebar ul{padding:0}.sidebar ul li{margin:15px 0;font-size:18px;width:100%}.sidebar ul li a{color:#f7f7f7;text-decoration:none;padding:10px 15px;border-radius:10px;width:100%;margin:-12px}.sidebar ul li a:hover{background-color:#00acee}.menu-item .menu-link .menu-icon{margin-right:10px;font-size:18px}.menu-sub{display:none;list-style-type:none;padding:0;margin-top:10px;height:0;opacity:0;transition:height .5s ease-out,opacity .5s ease-out}.card,.content{padding:20px}.loading-container,.overlay{position:fixed;top:0;left:0;width:100%;height:100%}.menu-item.active .menu-sub{display:block;opacity:1;height:auto}.menu-item .menu-toggle::after{content:"\f107";font-family:"Font Awesome 5 Free";font-weight:900;margin-left:auto;padding:10px;font-size:14px}.menu-item.active .menu-toggle::after{content:"\f106"}.menu-sub li{margin-left:25px}.menu-sub li a{padding-left:20px;opacity:0;margin:25px;animation:.5s forwards slideDown}.menu-sub li:nth-child(2) a{animation-delay:.2s}.menu-sub li:nth-child(3) a{animation-delay:.4s}.menu-sub li:nth-child(4) a{animation-delay:.6s}.menu-sub li:nth-child(5) a{animation-delay:.8s}.menu-sub li:nth-child(6) a{animation-delay:1s}.menu-sub li:nth-child(7) a{animation-delay:1.2s}.menu-sub li:nth-child(8) a{animation-delay:1.4s}.menu-sub li:nth-child(9) a{animation-delay:1.6s}.menu-sub li:nth-child(10) a{animation-delay:1.8s}@keyframes slideDown{from{transform:translateY(-20px);opacity:0}to{transform:translateY(0);opacity:1}}.overlay{background-color:rgba(0,0,0,.5);display:none;z-index:9}.overlay.active{display:block}.dashboard{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px}.card{background-color:#262637;border-radius:10px;display:flex;align-items:center;gap:15px;cursor:pointer;transition:background-color .3s}.section-title,ul{padding:10px;background-color:#2a2a3c;border-radius:10px}.card:hover{background-color:#34344f;transform:scale(1.01)}.card-icon{font-size:30px;color:#00acee}.card-text{display:flex;flex-direction:column}.section-title{margin-top:30px;margin-bottom:10px;font-size:20px;font-weight:700}ul{margin:10px 0}ul li{margin:5px 0;font-size:16px}.thanks-list{background-color:#262637;border-radius:10px;padding:15px;display:flex;flex-wrap:wrap;gap:10px}.thanks-list li{font-size:16px;font-weight:700;flex:1 1 calc(50% - 10px)}.light-mode{background-color:#fff;color:#000}.light-mode .sidebar ul li a{color:#262637}.light-mode .card,.light-mode .section-title,.light-mode .sidebar,.light-mode ul{background-color:#f7f7f7}.light-mode .navbar{background-color:#f0f0f0}.loading-container{background-color:rgba(0,0,0,.5);justify-content:center;align-items:center;z-index:100;display:none}.loading-spinner{border:6px solid #f3f3f3;border-top:6px solid #3498db;border-radius:50%;width:50px;height:50px;animation:1s linear infinite spin}@keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}.endpoint{border-bottom:3px solid #0ff;margin:30px 0 15px}
-  </style>
+    /* Global Styles */
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background-color: #1e1e2d;
+      color: #ffffff;
+      transition: background-color 0.3s, color 0.3s;
+      overflow-x: hidden;
+    }
+
+    h1, h3, p {
+      margin: 0;
+    }
+
+    /* Navbar */
+    .navbar {
+      background-color: #2a2a3c;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .navbar h1 {
+      font-size: 20px;
+    }
+
+    .menu-icons {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .menu-icons i {
+      font-size: 30px;
+      cursor: pointer;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: -300px;
+      width: 250px;
+      height: 100%;
+      background-color: #2a2a3c;
+      padding: 20px;
+      transition: left 0.9s;
+      z-index: 10;
+    }
+
+    .sidebar.active {
+      left: 0;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    
+    .sidebar ul li {
+      margin: 15px 0;
+      font-size: 18px;
+      width: 100%;
+    }
+    
+    .sidebar ul li a {
+      display: flex;
+      align-items: center;
+      color: #f7f7f7;
+      text-decoration: none;
+      padding: 10px 15px;
+      border-radius: 10px;
+      width: 100%;
+      margin: -12px;
+    }
+    
+    .sidebar ul li a:hover {
+      background-color: #00acee;
+    }
+    
+    .menu-item .menu-link {
+      display: flex;
+      align-items: center;
+    }
+    
+    .menu-item .menu-link .menu-icon {
+      margin-right: 10px;
+      font-size: 18px;
+    }
+    
+    .menu-sub {
+      display: none;
+      list-style-type: none;
+      padding: 0;
+      margin-top: 10px;
+      height: 0;
+      opacity: 0;
+      transition: height 0.5s ease-out, opacity 0.5s ease-out;
+    }
+    
+    .menu-item.active .menu-sub {
+      display: block;
+      opacity: 1;
+      height: auto;
+    }
+    
+    .menu-item .menu-toggle::after {
+      content: "\f107";
+      font-family: "Font Awesome 5 Free";
+      font-weight: 900;
+      margin-left: auto;
+      padding: 10px;
+      font-size: 14px;
+    }
+    
+    .menu-item.active .menu-toggle::after {
+      content: "\f106";
+    }
+    
+    .menu-sub li {
+      margin-left: 25px;
+    }
+    
+    .menu-sub li a {
+      padding-left: 20px;
+      opacity: 0;
+      margin: 25px;
+      animation: slideDown 0.5s forwards;
+    }
+    .menu-sub li:nth-child(2) a {
+      animation-delay: 0.2s;
+    }
+    .menu-sub li:nth-child(3) a {
+      animation-delay: 0.4s;
+    }
+    .menu-sub li:nth-child(4) a {
+      animation-delay: 0.6s;
+    }
+    .menu-sub li:nth-child(5) a {
+      animation-delay: 0.8s;
+    }
+    .menu-sub li:nth-child(6) a {
+      animation-delay: 1s;
+    }
+    .menu-sub li:nth-child(7) a {
+      animation-delay: 1.2s;
+    }
+    .menu-sub li:nth-child(8) a {
+      animation-delay: 1.4s;
+    }
+    .menu-sub li:nth-child(9) a {
+      animation-delay: 1.6s;
+    }
+    .menu-sub li:nth-child(10) a {
+      animation-delay: 1.8s;
+    }
+    
+    
+    @keyframes slideDown {
+      from {
+        transform: translateY(-20px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+    
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: none;
+      z-index: 9;
+    }
+
+    .overlay.active {
+      display: block;
+    }
+
+    /* Content */
+    .content {
+      padding: 20px;
+    }
+
+    /* Cards */
+    .dashboard {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background-color: #262637;
+      padding: 20px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .card:hover {
+      background-color: #34344f;
+      transform: scale(1.01);
+  }
+
+    .card-icon {
+      font-size: 30px;
+      color: #00acee;
+    }
+
+    .card-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Section Styles */
+    .section-title {
+      margin-top: 30px;
+      margin-bottom: 10px;
+      font-size: 20px;
+      font-weight: bold;
+      background-color: #2a2a3c;
+      padding: 10px;
+      border-radius: 10px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 10px 0;
+      background-color: #2a2a3c;
+      padding: 10px;
+      border-radius: 10px;
+    }
+
+    ul li {
+      margin: 5px 0;
+      font-size: 16px;
+    }
+
+    .thanks-list {
+      background-color: #262637;
+      border-radius: 10px;
+      padding: 15px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .thanks-list li {
+      font-size: 16px;
+      font-weight: bold;
+      flex: 1 1 calc(50% - 10px);
+    }
+
+
+    /* Light mode styles */
+    .light-mode {
+      background-color: #ffffff;
+      color: #000000;
+    }
+
+    .light-mode .sidebar ul li a {
+      color: #262637;
+    }
+
+    .light-mode .sidebar {
+      background-color: #f7f7f7;
+    }
+
+    .light-mode .navbar {
+      background-color: #f0f0f0;
+    }
+
+    .light-mode .card {
+      background-color: #f7f7f7;
+    }
+
+    .light-mode .section-title {
+      background-color: #f7f7f7;
+    }
+    .light-mode ul {
+      background-color: #f7f7f7;
+    }
+
+.loading-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  display: none; 
+}
+
+.loading-spinner {
+  border: 6px solid #f3f3f3;
+  border-top: 6px solid #3498db;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.endpoint {
+  border-bottom: 3px solid aqua;
+  margin: 30px 0 15px 0;
+}
+</style>
 </head>
 <body>
   <div class="loading-container" id="loading">
@@ -421,8 +744,26 @@ body,h1,h3,p{margin:0}.navbar,.sidebar{background-color:#2a2a3c;padding:20px}.si
       }, 1500); // 1.5 s
     }
     showLoading();
-    
-    
+
+
+    document.addEventListener('keydown', function (event) {
+      if (event.ctrlKey && (event.key === 'u' || event.key === 'U')) {
+          event.preventDefault();
+          alert('View Source dinonaktifkan!');
+      }
+  });
+  document.addEventListener('contextmenu', function (event) {
+    event.preventDefault();
+    alert('Klik kanan dinonaktifkan!');
+});
+
+document.addEventListener('keydown', function (event) {
+    if (event.ctrlKey && event.shiftKey && (event.key === 'I' || event.key === 'i')) {
+        event.preventDefault();
+        alert('Inspect Element dinonaktifkan!');
+    }
+});
+
 </script>
 </body>
-                                           </html>
+</html>
