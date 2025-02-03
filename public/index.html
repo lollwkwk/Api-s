@@ -444,7 +444,7 @@
         <i class="far fa-eye card-icon"></i>
         <div class="card-text">
           <h3>Visitor</h3>
-          <p id="visitor-count">Loading...</p>
+          <p id="visitorCount">Loading...</p>
         </div>
       </div>
 
@@ -452,7 +452,7 @@
         <i class="fas fa-sync card-icon"></i>
         <div class="card-text">
           <h3>Total Requests</h3>
-          <p id="usage-count">Loading...</p>
+          <p id="usageCount">Loading...</p>
         </div>
       </div>
 
@@ -460,7 +460,7 @@
         <i class="fas fa-sync card-icon"></i>
         <div class="card-text">
           <h3>Requests Today</h3>
-          <p id="request-count">Loading...</p>
+          <p id="reqToday">Loading...</p>
         </div>
       </div>
 
@@ -590,41 +590,24 @@
       window.open(url, '_blank');
     }
 
-    async function getUsageCount() {
+    async function fetchData() {
             try {
-                let response = await fetch('https://databse-apis.glitch.me/api/usage-count');
+                let response = await fetch('/api/get-usage-count');
                 let data = await response.json();
-                document.getElementById('usage-count').textContent = data.usageCount;
-            } catch (error) {
-                document.getElementById('usage-count').textContent = "Gagal memuat data";
-                console.error("Error fetching usage count:", error);
-            }
-        }
-        getUsageCount();
+                document.getElementById('usageCount').innerText = data.usageCount;
 
-    async function getRequestCount() {
-            try {
-                let response = await fetch('https://databse-apis.glitch.me/api/requesttoday/today');
-                let data = await response.json();
-                document.getElementById('request-count').textContent = data.requestCount;
-            } catch (error) {
-                document.getElementById('request-count').textContent = "Gagal memuat data";
-                console.error("Error fetching request count:", error);
-            }
-        }
-        getRequestCount();
+                response = await fetch('/api/reqtoday');
+                data = await response.json();
+                document.getElementById('reqToday').innerText = data.reqtoday;
 
-    async function getVisitorCount() {
-            try {
-                let response = await fetch('https://databse-apis.glitch.me/increment-visitor');
-                let data = await response.json();
-                document.getElementById('visitor-count').textContent = data.count;
+                response = await fetch('/api/visitor');
+                data = await response.text(); 
+                document.getElementById('visitorCount').innerText = data;
             } catch (error) {
-                document.getElementById('visitor-count').textContent = "Gagal memuat data";
-                console.error("Error fetching visitor count:", error);
+                console.error(error);
             }
         }
-        getVisitorCount();
+        fetchData();
 
     function updateClock() {
             let now = new Date();
