@@ -591,23 +591,25 @@
     }
 
     async function fetchData() {
-            try {
-                let response = await fetch('/api/get-usage-count');
-                let data = await response.json();
-                document.getElementById('usageCount').innerText = data.usageCount;
+    try {
+        let response = await fetch('/api/get-usage-count');
+        let data = await response.json();
+        document.getElementById('usageCount').innerText = data.usageCount;
 
-                response = await fetch('/api/reqtoday');
-                data = await response.json();
-                document.getElementById('reqToday').innerText = data.reqtoday;
+        response = await fetch('/api/reqtoday');
+        data = await response.json();
+        document.getElementById('reqToday').innerText = data.reqtoday;
 
-                response = await fetch('/api/visitor');
-                data = await response.text(); 
-                document.getElementById('visitorCount').innerText = data;
-            } catch (error) {
-                console.error(error);
-            }
-        }
-        fetchData();
+        response = await fetch('/api/visitor');
+        data = await response.text(); 
+        document.getElementById('visitorCount').innerText = data;
+    } catch (error) {
+        console.error(error);
+    }
+}
+setInterval(fetchData, 5000);
+fetchData();
+
 
     function updateClock() {
             let now = new Date();
@@ -658,10 +660,10 @@
             const months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
             
             const today = new Date();
-            const day = days[today.getDay()]; // Mendapatkan hari (Minggu, Senin, dst.)
-            const date = today.getDate(); // Mendapatkan tanggal (1, 2, 3, dst.)
-            const month = months[today.getMonth()]; // Mendapatkan bulan (Januari, Februari, dst.)
-            const year = today.getFullYear(); // Mendapatkan tahun (2025, dst.)
+            const day = days[today.getDay()]; 
+            const date = today.getDate(); 
+            const month = months[today.getMonth()]; 
+            const year = today.getFullYear(); 
 
             document.getElementById('date-info').textContent = `${day}, ${date} ${month} ${year}`;
         }
